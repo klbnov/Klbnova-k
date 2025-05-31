@@ -5,14 +5,15 @@
   <title>Зураг илгээх</title>
 </head>
 <body>
-  <h2>Зураг илгээх туршилт</h2>
+  <h2>📸 Зураг илгээх туршилт</h2>
   <video id="video" width="300" autoplay></video>
   <br>
-  <button onclick="takeSnapshot()">📸 Зураг дарах</button>
+  <button onclick="takeSnapshot()">Зураг дарах</button>
   <canvas id="canvas" width="300" height="200" style="display:none;"></canvas>
 
   <script type="module">
     import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+
     emailjs.init('eLyD0g1O_O3XcFQ3d'); // ← таны public key
 
     const video = document.getElementById('video');
@@ -20,10 +21,10 @@
     const context = canvas.getContext('2d');
 
     navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => {
+      .then((stream) => {
         video.srcObject = stream;
       })
-      .catch(err => {
+      .catch((err) => {
         alert("Камер асаагүй: " + err);
       });
 
