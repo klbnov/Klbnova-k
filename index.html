@@ -1,45 +1,18 @@
 <!DOCTYPE html>
-<html lang="mn">
-<head>
-  <meta charset="UTF-8">
-  <title>Зураг илгээх</title>
-</head>
+<html>
+<head><title>Камер турших</title></head>
 <body>
-  <h2>📸 Зураг илгээх туршилт</h2>
-  <video id="video" width="300" autoplay></video>
-  <br>
-  <button onclick="takeSnapshot()">Зураг дарах</button>
-  <canvas id="canvas" width="300" height="200" style="display:none;"></canvas>
+  <h2>Камер асаж байна уу?</h2>
+  <video id="video" autoplay width="300" height="200"></video>
 
-  <script type="module">
-    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-
-    emailjs.init('eLyD0g1O_O3XcFQ3d'); // ← таны public key
-
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const context = canvas.getContext('2d');
-
+  <script>
     navigator.mediaDevices.getUserMedia({ video: true })
-      .then((stream) => {
-        video.srcObject = stream;
+      .then(function (stream) {
+        document.getElementById("video").srcObject = stream;
       })
-      .catch((err) => {
-        alert("Камер асаагүй: " + err);
+      .catch(function (err) {
+        alert("Камерын алдаа: " + err.message);
       });
-
-    window.takeSnapshot = function () {
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const imageData = canvas.toDataURL('image/png');
-
-      emailjs.send("service_i42qtc9", "template_6zilr7d", {
-        image_url: imageData
-      }).then(() => {
-        alert("Зураг амжилттай илгээгдлээ!");
-      }, (error) => {
-        alert("Алдаа гарлаа: " + JSON.stringify(error));
-      });
-    };
   </script>
 </body>
 </html>
