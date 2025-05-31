@@ -40,11 +40,10 @@
   </script>
 
   <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      emailjs.init("eLyD0g1O_O3XcFQ3d"); // ← Таны Public Key
-    })();
-  </script>
+<script type="module">
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+  emailjs.init('eLyD0g1O_O3XcFQ3d'); // ← таны public key
+  window.emailjs = emailjs;
+</script>
 </body>
 </html>
